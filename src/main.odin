@@ -3,9 +3,9 @@ package main
 import "base:runtime"
 
 import sapp "../lib/sokol/app"
-import sg "../lib/sokol/gfx"
-import sglue "../lib/sokol/glue"
-import slog "../lib/sokol/log"
+// import sg "../lib/sokol/gfx"
+// import sglue "../lib/sokol/glue"
+// import slog "../lib/sokol/log"
 
 import "./render"
 
