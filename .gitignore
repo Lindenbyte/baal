@@ -1,1 +1,4 @@
 bin
+
+# Removes all generated odin files
+src/render/shader/*.odin

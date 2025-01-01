@@ -20,7 +20,7 @@ if "%1"=="release" (
 
 echo [Building]
 	if not exist "%DIR%" (mkdir "%DIR%")
-	@REM // TODO ADD SOKOL COMP HERE
+	call "./ext/sokol-shdc.exe" -i src/render/shader/quad.glsl -o src/render/shader/quad.odin -l hlsl5 -f sokol_odin
 	odin build %SRC% -out:%DIR%/%EXE% %FLAGS%
 
 if not "%1"=="run" if not "%2"=="run" (goto NO_RUN)
