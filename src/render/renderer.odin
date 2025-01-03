@@ -20,32 +20,29 @@ renderer: struct {
 }
 
 initialize_renderer :: proc() {
-	sg_desc := sg.Desc {
+	sg.setup({
 		environment = sglue.environment(),
 		logger = { func = slog.func },
-	}
-	sg.setup(sg_desc)
+	})
 
 	renderer.vertecies = []f32 {
-		 0.5,  0.5, 0.0,
-		 0.5, -0.5, 0.0,
-		-0.5, -0.5, 0.0,
-		-0.5,  0.5, 0.0,
+		-0.5, -0.5, 0,
+		 0.5, -0.5, 0,
+		 0.5,  0.5, 0,
+		-0.5,  0.5, 0,
 	}
 	gfx_state.bindings.vertex_buffers[0] = sg.make_buffer({
-		label = "quad-vertecies",
 		usage = .DYNAMIC,
 		size = len(renderer.vertecies) * size_of(f32),
 	})
 
 	renderer.indecies = []u16 {
-		0, 2, 3,
 		0, 1, 2,
+		0, 2, 3,
 	}
 	gfx_state.bindings.index_buffer = sg.make_buffer({
-		label = "quad-indecies",
 		type = .INDEXBUFFER,
-		data = { ptr = &renderer.indecies[0], size = len(renderer.indecies) },
+		data = { ptr = &renderer.indecies[0], size = len(renderer.indecies) * size_of(u16) },
 	})
 
 	gfx_state.pipeline = sg.make_pipeline({
@@ -70,10 +67,10 @@ terminate_renderer :: proc() {
 }
 
 flush_renderer :: proc() {
-	sg.update_buffer(
-		gfx_state.bindings.vertex_buffers[0],
-		{ ptr = &renderer.vertecies[0], size = len(renderer.vertecies) * size_of(f32) },
-	)
+	// sg.update_buffer(
+	// 	gfx_state.bindings.vertex_buffers[0],
+	// 	{ ptr = &renderer.vertecies[0], size = len(renderer.vertecies) * size_of(f32) },
+	// )
 	
 	sg.begin_pass({ action = gfx_state.pass_action, swapchain = sglue.swapchain() })
 		sg.apply_pipeline(gfx_state.pipeline)

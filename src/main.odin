@@ -1,6 +1,7 @@
 package main
 
 import "base:runtime"
+import "core:fmt"
 
 import sapp "../lib/sokol/app"
 // import sg "../lib/sokol/gfx"
@@ -48,6 +49,7 @@ main :: proc() {
 		window_title = WINDOW_TITLE,
 		width = WINDOW_WIDTH,
 		height = WINDOW_HEIGHT,
+		// high_dpi = true,
 	}
 	
 	sapp.run(description)

@@ -1,20 +1,20 @@
 @header package shader
 @header import sg "../../../lib/sokol/gfx"
 
-@vs vert
-in vec4 position;
+@vs vs
+in vec3 position;
 
 void main() {
-	gl_Position = vec4(position.x, position.y, position.y, 1.0f);
+	gl_Position = vec4(position, 0.0f);
 }
 @end
 
-@fs frag
+@fs fs
 out vec4 FragColor;
 
 void main() {
-	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+	FragColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 @end
 
-@program quad vert frag
+@program quad vs fs
