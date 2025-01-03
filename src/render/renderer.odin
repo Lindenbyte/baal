@@ -36,6 +36,11 @@ initialize_renderer :: proc() {
 		size = len(renderer.vertecies) * size_of(f32),
 	})
 
+	sg.update_buffer(
+		gfx_state.bindings.vertex_buffers[0],
+		{ ptr = &renderer.vertecies[0], size = len(renderer.vertecies) * size_of(f32) },
+	)
+
 	renderer.indecies = []u16 {
 		0, 1, 2,
 		0, 2, 3,
@@ -67,11 +72,6 @@ terminate_renderer :: proc() {
 }
 
 flush_renderer :: proc() {
-	// sg.update_buffer(
-	// 	gfx_state.bindings.vertex_buffers[0],
-	// 	{ ptr = &renderer.vertecies[0], size = len(renderer.vertecies) * size_of(f32) },
-	// )
-	
 	sg.begin_pass({ action = gfx_state.pass_action, swapchain = sglue.swapchain() })
 		sg.apply_pipeline(gfx_state.pipeline)
 		sg.apply_bindings(gfx_state.bindings)
